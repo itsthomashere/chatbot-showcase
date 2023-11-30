@@ -1,7 +1,7 @@
 import streamlit as st
 from sqlalchemy import create_engine, text, bindparam
 
-def get_sql_dataframe(table_name: str) -> None:
+def get_sql_dataframe(table_name: str, order) -> None:
     conn = st.connection("digitalocean", type="sql")
     query = f'select * from {table_name} order by {order}'
     messages = conn.query(query)
