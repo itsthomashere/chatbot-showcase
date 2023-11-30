@@ -44,7 +44,7 @@ def customize_streamlit_ui() -> None:
     st.set_page_config(
         page_title="→ 🤖 → 🕸️ IdeaVault!",
         page_icon="💡",
-        layout="centered"
+        layout="wide"
         )
 
     hide_st_style = """
