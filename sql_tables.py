@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, text, bindparam
 
 def get_sql_dataframe(table_name: str) -> None:
     conn = st.connection("digitalocean", type="sql")
-    query = f'select * from {table_name} order by category'
+    query = f'select * from {table_name} order by {order}'
     messages = conn.query(query)
     st.dataframe(messages, use_container_width=True, hide_index=True)
 
@@ -47,7 +47,7 @@ def donations_dataset():
         'total_weight': 0.5
     }
 
-    get_sql_dataframe('donation_log')
+    get_sql_dataframe('donation_log', 'date_received')
     dummy_data = st.button("Send dummy data...")
     if dummy_data:
         update_table('donation_log', product_details)
@@ -55,5 +55,5 @@ def donations_dataset():
 
 def food_dataset():
     st.write("Hello from Woolworths Dataset")
-    get_sql_dataframe('dataset')
+    get_sql_dataframe('dataset', 'category')
 
