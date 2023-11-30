@@ -12,9 +12,9 @@ from scanner import receive_barcodes
 def create_tables() -> None:
     conn = st.connection("digitalocean", type="sql")
     with conn.session as s:
-        # Create the 'donation-history' table with specified columns
+        # Create the 'donation_log' table with specified columns
         s.execute(text("""
-                    CREATE TABLE IF NOT EXISTS donation-history (
+                    CREATE TABLE IF NOT EXISTS donation_log (
                     date_received DATE,
                     product_code VARCHAR(13),
                     product_name VARCHAR(255),

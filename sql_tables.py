@@ -42,10 +42,10 @@ def donations_dataset():
         'total_weight': 0.5
     }
 
-    get_sql_dataframe('donation-history')
+    get_sql_dataframe('donation_log')
     dummy_data = st.button("Send dummy data...")
     if dummy_data:
-        update_table('donation-history', product_details)
+        update_table('donation_log', product_details)
 
 
 def food_dataset():
