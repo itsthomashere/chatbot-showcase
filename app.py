@@ -85,4 +85,5 @@ init_chat_history()
 user_input = st.text_input("Enter a barcode")
 if user_input:
     # --- DISPLAY MESSAGE TO STREAMLIT UI, UPDATE SQL, UPDATE SESSION STATE ---
+    st.write(user_input)
 
