@@ -15,6 +15,7 @@ def create_tables() -> None:
         # Create the 'donation_history' table with specified columns
         s.execute(text("""
                     CREATE TABLE IF NOT EXISTS donation_history (
+                    date_received DATE,
                     product_code VARCHAR(13),
                     product_name VARCHAR(255),
                     category VARCHAR(255),
