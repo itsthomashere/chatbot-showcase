@@ -1,12 +1,16 @@
 import os
-import streamlit as st
+
 import openai
-import constants as c
+import streamlit as st
+from streamlit_option_menu import option_menu
 from sqlalchemy import create_engine, text
 
 
-import uuid
-from datetime import datetime, timedelta
+st.title('Woolworths Project')
+
+options = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'], 
+    icons=['house', 'cloud-upload', "list-task", 'gear'], 
+    menu_icon="cast", default_index=0, orientation="horizontal")
 
 
 def determine_image(role: str, content: str) -> str:
