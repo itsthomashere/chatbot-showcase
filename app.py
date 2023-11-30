@@ -5,6 +5,23 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from sqlalchemy import create_engine, text
 
+def customize_streamlit_ui() -> None:
+    st.set_page_config(
+        page_title="→ 🤖 → 🕸️ IdeaVault!",
+        page_icon="💡",
+        layout="centered"
+        )
+
+    hide_st_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                header {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_st_style, unsafe_allow_html=True)
+
+
 
 customize_streamlit_ui()
 st.title('Woolworths Project')
@@ -41,23 +58,6 @@ def check_keywords(response: str) -> None:
     if all(keyword in response for keyword in keywords):
         st.markdown("You can view the Obsidian graph [here](https://publish.obsidian.md/ideavault).")
         update_session_state(role="assistant", content="You can view the Obsidian graph [here](https://publish.obsidian.md/ideavault).")
-
-def customize_streamlit_ui() -> None:
-    st.set_page_config(
-        page_title="→ 🤖 → 🕸️ IdeaVault!",
-        page_icon="💡",
-        layout="centered"
-        )
-
-    hide_st_style = """
-                <style>
-                #MainMenu {visibility: hidden;}
-                footer {visibility: hidden;}
-                header {visibility: hidden;}
-                </style>
-                """
-    st.markdown(hide_st_style, unsafe_allow_html=True)
-
 
 #@st.cache_data
 def init_user_id() -> str:
