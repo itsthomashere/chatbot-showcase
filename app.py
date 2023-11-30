@@ -78,9 +78,6 @@ try:
 except Exception:
     pass
 
-# --- INIT SESSION_STATE MESSAGES---
-init_chat_history()
-
 # --- USER INTERACTION ---
 user_input = st.text_input("Enter a barcode")
 if user_input:
