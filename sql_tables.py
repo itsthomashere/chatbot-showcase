@@ -5,7 +5,7 @@ def get_sql_dataframe(table_name: str) -> None:
     conn = st.connection("digitalocean", type="sql")
     query = f'select * from {table_name} order by category'
     messages = conn.query(query)
-    st.dataframe(messages, use_container_width=True, hide_index=False)
+    st.dataframe(messages, use_container_width=True, hide_index=True)
 
 
 def update_table(table_name, donation_data):
