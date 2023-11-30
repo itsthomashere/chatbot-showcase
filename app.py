@@ -6,6 +6,7 @@ from streamlit_option_menu import option_menu
 from sqlalchemy import create_engine, text
 
 
+customize_streamlit_ui()
 st.title('Woolworths Project')
 
 options = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'], 
@@ -165,7 +166,6 @@ def display_welcome_info() -> None:
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 
-customize_streamlit_ui()
 try:
     create_tables()
 except Exception:
