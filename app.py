@@ -80,9 +80,9 @@ st.write(options)
 
 #pages = [receive_barcodes, food_dataset, donations_dataset]
 pages = {
-    0: donations_dataset,
-    1: receive_barcodes,
-    2: food_dataset
+    'Donations': donations_dataset,
+    'Barcode Scanner': receive_barcodes,
+    'Dataset': food_dataset
 }
 pages[options]()
 
