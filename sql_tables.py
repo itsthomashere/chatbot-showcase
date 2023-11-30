@@ -34,7 +34,7 @@ def donations_dataset():
     get_sql_dataframe('donation_history')
     dummy_data = st.button("Send dummy data...")
     if dummy_data:
-        update_table('donation_history', **product_details)
+        update_table('donation_history', product_details)
 
 
 def food_dataset():
