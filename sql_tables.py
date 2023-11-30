@@ -54,6 +54,5 @@ def donations_dataset():
 
 
 def food_dataset():
-    st.write("Hello from Woolworths Dataset")
     get_sql_dataframe('dataset', 'category')
 
