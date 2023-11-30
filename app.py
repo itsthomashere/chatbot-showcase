@@ -10,7 +10,7 @@ from scanner import receive_barcodes
 
 
 def create_tables() -> None:
-    conn = st.experimental_connection("digitalocean", type="sql")
+    conn = st.connection("digitalocean", type="sql")
     with conn.session as s:
         # Create the 'donation_history' table with specified columns
         s.execute(text("""
@@ -27,7 +27,7 @@ def create_tables() -> None:
 
 
 def check_existing_entry(table_name: str, product_code: str) -> tuple | None:
-    conn = st.experimental_connection("digitalocean", type="sql")
+    conn = st.connection("digitalocean", type="sql")
     with conn.session as s:
         query = text(f"""
             SELECT product_code, product_name, category, price, weight FROM {table_name} WHERE product_code = :product_code
