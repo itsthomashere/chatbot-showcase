@@ -76,6 +76,7 @@ options = option_menu(None,
                       default_index=1, 
                       orientation="horizontal"
                       )
+st.write(options)
 
 #pages = [receive_barcodes, food_dataset, donations_dataset]
 pages = {
