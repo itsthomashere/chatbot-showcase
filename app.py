@@ -202,7 +202,7 @@ if user_message:
 
     except Exception as e:
         error_message = f"Error: {str(e)}"
-        print(error_message)
+        st.write(error_message)
         #self.status_update(False, error_message)
         # CustomApplication.processEvents()
         pass
