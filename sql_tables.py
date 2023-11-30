@@ -3,7 +3,7 @@ import streamlit as st
 def get_sql_dataframe(table_name: str) -> None:
     conn = st.connection("digitalocean", type="sql")
     query = f'select * from {table_name} order by category'
-    messages = conn.query(query, ttl=timedelta(minutes=1))
+    messages = conn.query(query)
     st.dataframe(messages)
 
 def food_dataset():
