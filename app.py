@@ -5,6 +5,8 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from sqlalchemy import create_engine, text
 
+from sql_tables import food_dataset, donations_dataset
+
 
 def create_tables() -> None:
     conn = st.experimental_connection("digitalocean", type="sql")
