@@ -13,7 +13,12 @@ def update_table(table_name, donation_data):
     # Define the SQL query with placeholders
     query = text(f"""
     INSERT INTO {table_name} (date_received, product_code, product_name, category, price, weight, quantity, total_price, total_weight)
-    VALUES (:date_received, :product_code, :product_name, :category, :price, :weight, :quantity, :total_price, :total_weight);
+    VALUES (:date_received, :product_code, :product_name, :category, :price, :weight, :quantity, :total_price, :total_weight)
+    ON CONFLICT (product_code)
+    DO UPDATE SET
+        quantity = your_table_name.quantity + EXCLUDED.quantity,
+        total_price = your_table_name.price * (your_table_name.quantity + EXCLUDED.quantity),
+        total_weight = your_table_name.weight * (your_table_name.quantity + EXCLUDED.quantity);
     """)
 
     # Explicitly bind parameters
