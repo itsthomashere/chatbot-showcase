@@ -6,6 +6,7 @@ from streamlit_option_menu import option_menu
 from sqlalchemy import create_engine, text
 
 from sql_tables import food_dataset, donations_dataset
+from scanner import receive_barcodes
 
 
 def create_tables() -> None:
@@ -76,9 +77,11 @@ options = option_menu(None,
                       orientation="horizontal"
                       )
 
+pages = [receive_barcodes, food_dataset, donations_dataset]
+pages[options]()
+
 try:
     create_tables()
-    st.success('`Connection to SQL established...`')
 except Exception as e:
     st.error(e)
 
