@@ -5,33 +5,6 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from sqlalchemy import create_engine, text
 
-def customize_streamlit_ui() -> None:
-    st.set_page_config(
-        page_title="→ 🤖 → 🕸️ IdeaVault!",
-        page_icon="💡",
-        layout="centered"
-        )
-
-    hide_st_style = """
-                <style>
-                #MainMenu {visibility: hidden;}
-                footer {visibility: hidden;}
-                header {visibility: hidden;}
-                </style>
-                """
-    st.markdown(hide_st_style, unsafe_allow_html=True)
-
-customize_streamlit_ui()
-
-title = "Woolworths Food Donations"
-title = st.markdown(
-    f"<h1 style='text-align: center;'>{title}</h1>", unsafe_allow_html=True
-)
-
-options = option_menu(None, ["Donations", "Barcode Scanner", "Dataset"], 
-    icons=['house', 'cloud-upload', "list-task"], 
-    menu_icon="cast", default_index=1, orientation="horizontal")
-
 
 def create_tables() -> None:
     conn = st.experimental_connection("digitalocean", type="sql")
@@ -59,14 +32,51 @@ def check_existing_entry(table_name: str, product_code: str) -> tuple | None:
         result = s.execute(query, {"product_code": product_code}).fetchone()
     return result
 
+
 def get_sql_dataframe(table_name: str) -> None:
     conn = st.connection("digitalocean", type="sql")
     query = f'select * from {table_name} order by category'
     messages = conn.query(query, ttl=timedelta(minutes=1))
     st.dataframe(messages)
 
+
+def customize_streamlit_ui() -> None:
+    st.set_page_config(
+        page_title="→ 🤖 → 🕸️ IdeaVault!",
+        page_icon="💡",
+        layout="centered"
+        )
+
+    hide_st_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                header {visibility: hidden;}
+                </style>
+                """
+    st.markdown(hide_st_style, unsafe_allow_html=True)
+
+
+# ---------------------------------
+
+customize_streamlit_ui()
+
+title = "Woolworths Food Donations"
+title = st.markdown(
+    f"<h1 style='text-align: center;'>{title}</h1>", unsafe_allow_html=True
+)
+
+options = option_menu(None, 
+                      ["Donations", "Barcode Scanner", "Dataset"], 
+                      icons=['clipboard-data', 'upc-scan', "database-add"], 
+                      menu_icon="cast", 
+                      default_index=1, 
+                      orientation="horizontal"
+                      )
+
 try:
     create_tables()
+    st.success('`Connection to SQL established...`')
 except Exception as e:
     st.error(e)
 
