@@ -7,7 +7,6 @@ from sqlalchemy import create_engine, text
 
 import uuid
 from datetime import datetime, timedelta
-from openai import api_requestor
 
 
 def determine_image(role: str, content: str) -> str:
@@ -193,8 +192,6 @@ if user_message:
     update_session_state(role="user", content=user_message)
     
 
-    func = api_requestor.parse_stream_helper
-    api_requestor.parse_stream_helper = lambda line: func(line) if line != b'data: "{\\"rate_limit_usage\\": {\\' else None
 
     # --- PASS THE ENTIRETY OF SESSION STATE MESSAGES TO OPENAI ---
     try:
