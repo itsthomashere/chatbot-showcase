@@ -22,11 +22,15 @@ def customize_streamlit_ui() -> None:
     st.markdown(hide_st_style, unsafe_allow_html=True)
 
 customize_streamlit_ui()
-st.title('Woolworths Project')
 
-options = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'], 
-    icons=['house', 'cloud-upload', "list-task", 'gear'], 
-    menu_icon="cast", default_index=0, orientation="horizontal")
+title = "Woolworths Food Donations"
+title = st.markdown(
+    f"<h1 style='text-align: center;'>{title}</h1>", unsafe_allow_html=True
+)
+
+options = option_menu(None, ["Donation History", "Barcode Scanner", "Dataset"], 
+    icons=['house', 'cloud-upload', "list-task"], 
+    menu_icon="cast", default_index=1, orientation="horizontal")
 
 def create_tables() -> None:
     conn = st.experimental_connection("digitalocean", type="sql")
