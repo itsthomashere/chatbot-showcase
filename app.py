@@ -36,17 +36,10 @@ def check_existing_entry(table_name: str, product_code: str) -> tuple | None:
     return result
 
 
-def get_sql_dataframe(table_name: str) -> None:
-    conn = st.connection("digitalocean", type="sql")
-    query = f'select * from {table_name} order by category'
-    messages = conn.query(query, ttl=timedelta(minutes=1))
-    st.dataframe(messages)
-
-
 def customize_streamlit_ui() -> None:
     st.set_page_config(
-        page_title="→ 🤖 → 🕸️ IdeaVault!",
-        page_icon="💡",
+        page_title="Barcode Scanner",
+        page_icon="📊",
         layout="wide"
         )
 
@@ -76,25 +69,18 @@ options = option_menu(None,
                       default_index=1, 
                       orientation="horizontal"
                       )
-st.write(options)
 
-#pages = [receive_barcodes, food_dataset, donations_dataset]
+# --- MORE EFFICIENT ALTERNATIVE TO IF ELIF STATEMENTS
 pages = {
     'Donations': donations_dataset,
     'Barcode Scanner': receive_barcodes,
     'Dataset': food_dataset
 }
 pages[options]()
+# ---
 
 try:
     create_tables()
 except Exception as e:
     st.error(e)
-
-# --- USER INTERACTION ---
-user_input = st.text_input("Enter a barcode")
-if user_input:
-    # --- DISPLAY MESSAGE TO STREAMLIT UI, UPDATE SQL, UPDATE SESSION STATE ---
-    st.write(user_input)
-
 

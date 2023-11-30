@@ -1,5 +1,7 @@
 import streamlit as st
 
 def receive_barcodes():
-    st.write("Enter a barcode")
+    user_input = st.text_input("Enter a barcode")
+    if user_input:
+        st.write(user_input)
 
